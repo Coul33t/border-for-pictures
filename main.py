@@ -1,5 +1,5 @@
 import pathlib
-
+import os
 from PIL import Image
 
 def main(input_path, output_path, border_size = 50, add_black=False):
@@ -21,12 +21,14 @@ def main(input_path, output_path, border_size = 50, add_black=False):
     new_im.save(pathlib.Path(output_path, input_path.stem + "_border_" + str(border_size) + input_path.suffix))
 
 if __name__ == "__main__":
-    filename = "0009_7_retouchee_recadree.jpg"
-    input_folder = "input"
-    output_folder = "output"
+    input_folder = "input/"
+    output_folder = "output/"
 
-    input_path = pathlib.Path(input_folder, filename)
     output_path = pathlib.Path(output_folder)
-    border_size = 50
 
-    main(input_path, output_path, border_size, True)
+    filenames = [path for path in os.listdir(input_folder) if path[-3:] != "txt"]
+    border_size = 100
+
+    for file in filenames:
+        input_path = pathlib.Path(input_folder, file)
+        main(input_path, output_path, border_size, False)
