@@ -1,0 +1,12 @@
+bin/
+include/
+lib/
+lib64/
+lib64
+input/*
+!input/keep.txt
+output/*
+!output/keep.txt
+tmp/*
+!tmp/keep.txt
+pyvenv.cfg
