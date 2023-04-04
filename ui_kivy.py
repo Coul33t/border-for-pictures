@@ -52,16 +52,26 @@ class WhiteBorder(Widget):
         print(f"Vertical black border size: {self.top_bottom_black_size.text}")
         print(f"Horizontal black border size: {self.left_right_black_size.text}")
 
-        if self.white_border_size:
+        if self.white_border_size.text:
             white_border_int = int(self.white_border_size.text)
 
-            if white_border_int > 0:
+            if white_border_int >= 0:
                 im = PilImage.open(self.path_to_image)
                 original_size = im.size
                 new_size = (original_size[0] + white_border_int, original_size[1] + white_border_int)
                 new_im = PilImage.new("RGB", new_size, (255, 255, 255))
                 new_pos = (int(white_border_int / 2), int(white_border_int / 2))
                 new_im.paste(im, new_pos)
+
+                if self.top_bottom_black_size.text:
+                    black_border_v_int = int(self.top_bottom_black_size.text)
+
+                    if black_border_v_int > 0:
+                        new_size_black = (new_size[0], new_size[1] + 1000)
+                        new_im_with_black = PilImage.new("RGB", new_size_black)
+                        new_pos = (0, 500)
+                        new_im_with_black.paste(new_im, new_pos)
+                        new_im = new_im_with_black
 
                 self.tmp_path = pathlib.Path(os.path.dirname(os.path.realpath(__file__)) + "/tmp/" + (self.image_name + "_tmp" + self.suffix))
 
