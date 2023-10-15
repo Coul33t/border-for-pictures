@@ -48,7 +48,6 @@ class WhiteBorder(Widget):
 
         self.path_to_image = pathlib.Path(self.selection)
         self.image.source = self.path_to_image.as_posix()
-        breakpoint()
         self.image_name = self.path_to_image.name[:-len(self.path_to_image.suffix)]
         self.suffix = self.path_to_image.suffix
 
@@ -103,6 +102,7 @@ class WhiteBorder(Widget):
         if self.black_v_border_size_stored > 0:
             new_name += f"_bborder_{self.black_v_border_size_stored}"
 
+        breakpoint()
         shutil.move(self.tmp_path.as_posix(), (os.sep.join(self.tmp_path.parts[:-2]))[1:] + os.sep + "output" + os.sep + new_name)
 
 
