@@ -43,7 +43,7 @@ def process_picture(input_path, output_path, auto_border_size = True, border_siz
 
     # If black borders must be added, do the same, but with a black image (size is fixed for now)
     if add_black:
-        new_im_with_black = add_black_borders(new_im, im_size)
+        new_im_with_black = add_black_borders(new_im, im_size, auto_border_size, border_size)
         new_im_with_black.save(pathlib.Path(output_path, input_path.stem + "_border_" + str(border_size) + "_black" + input_path.suffix))       
 
     # Save the image in the output folder
