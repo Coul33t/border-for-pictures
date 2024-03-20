@@ -1,6 +1,15 @@
+import argparse
+
 import pathlib
 import os
 from PIL import Image
+
+def parserHandling():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-i", "--input", dest="input_path", help="Input folder to process", default="input/")
+    parser.add_argument("-o", "--output", dest="output_path", help="Output folder to process", default="output/")
+    parser.add_argument("-w", "--white_border_size", dest="white_border_size", help="White border size", default=50)
+    return parser.parse_args()
 
 def main(input_path, output_path, border_size = 50, add_black=False):
     im = Image.open(input_path)
@@ -21,14 +30,12 @@ def main(input_path, output_path, border_size = 50, add_black=False):
     new_im.save(pathlib.Path(output_path, input_path.stem + "_border_" + str(border_size) + input_path.suffix))
 
 if __name__ == "__main__":
-    input_folder = "input/"
-    output_folder = "output/"
+    args = parserHandling()
 
-    output_path = pathlib.Path(output_folder)
+    output_path = pathlib.Path(args.output_path)
 
-    filenames = [path for path in os.listdir(input_folder) if path[-3:] != "txt"]
-    border_size = 100
+    filenames = [path for path in os.listdir(args.input_path) if path[-3:] != "txt"]
 
     for file in filenames:
-        input_path = pathlib.Path(input_folder, file)
-        main(input_path, output_path, border_size, False)
+        file_input_path = pathlib.Path(args.input_path, file)
+        main(file_input_path, args.output_path, args.white_border_size, False)
