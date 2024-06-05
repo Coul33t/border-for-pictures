@@ -8,7 +8,7 @@ def parserHandling():
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--input", dest="input_path", help="Input folder to process", default="input/")
     parser.add_argument("-o", "--output", dest="output_path", help="Output folder to process", default="output/")
-    parser.add_argument("-w", "--white_border_size", dest="white_border_size", help="White border size", default=50)
+    parser.add_argument("-w", "--white_border_size", dest="white_border_size", help="White border size", default=50, type=int)
     return parser.parse_args()
 
 def processOnePicture(file_input_path, output_path, white_border_size, add_black_border):
